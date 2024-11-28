@@ -1,0 +1,26 @@
+@startuml conta-bancaria
+
+class Usuario {
+    - id: UUID
+    - nome: String
+    - cpf: String
+    - contaBancaria: ContaBancaria
+}
+
+class ContaBancaria {
+    - banco: String
+    - agencia: String
+    - numero: String
+    - saldo: Double
+}
+
+class Deposito {
+    - id: UUID
+    - valor: Double
+    - data: LocalDateTime
+    - contaBancaria: ContaBancaria
+}
+
+Usuario "1" -- "1" ContaBancaria
+ContaBancaria "1" -- "0..*" Deposito
+@enduml
