@@ -15,11 +15,9 @@ package org.example
 //-Gerar recibo Número da conta e agência (com informações parcialmente ocultas, para segurança), Valor do depósito,
 // Data e hora da transação.
 
-
 fun main(){
 
 }
-
 
 
 
