@@ -1,4 +1,7 @@
 package org.example
+import java.time.LocalDateTime
+import java.util.Scanner
+import java.util.UUID
 
 //' Desenvolver um sistema bancário que permita a criação de contas bancárias e depósitos.
 //' Regras:
@@ -15,23 +18,98 @@ package org.example
 //-Gerar recibo Número da conta e agência (com informações parcialmente ocultas, para segurança), Valor do depósito,
 // Data e hora da transação.
 
-fun main(){
-
+class ContaBancaria (
+    val banco: String = "Bradesco",
+    val agencia: String = "1234-5",
+    val numero: String,
+    val saldo: Double = 0.00
+){
+    override fun toString(): String {
+        return "{\nBanco: $banco, \nAgência: $agencia, \nNúmero: $numero, \nSaldo da Conta: R$ $saldo\n}"
+    }
 }
 
+class Usuario (
+    val id: UUID = UUID.randomUUID(),
+    val nome: String,
+    val cpf: String,
+    val contaBancaria: ContaBancaria
+){
+    override fun toString(): String {
+        return "ID do Usuário: $id, \nNome: $nome, \ncpf: $cpf, \nConta Bancária: $contaBancaria"
+    }
+}
 
+class Deposito (
+    val id: UUID,
+    val valor: Double,
+    val data: LocalDateTime,
+    val contaBancaria: ContaBancaria
+){
+    override fun toString(): String {
+        return "ID da transação: $id, \nValor: $valor, \nData: $data, \nConta Bancária: $contaBancaria"
+    }
+}
 
+fun main(){
 
+    var scannerInput = Scanner(System.`in`)
+    var usuarios : MutableList<Usuario> = mutableListOf()
+    var contas : MutableList<ContaBancaria> = mutableListOf()
+    var contContas: Int = 0
 
+    println("*****BEM-VINDO*****\nSelecione a opção que deseja ou digite 'sair' para sair")
+    println("1. Criar nova conta\n2. Fazer um deposito\n3. consultar extrato\n Consultar saldo")
 
+    do {
+        print("Digite sua opção:")
+        val entrada = scannerInput.nextLine()
 
+        if (entrada == "sair") break
 
+        val verificaInt = entrada.toIntOrNull()
 
+        if (verificaInt == null) {
+            println("Insira um valor válido")
 
+        } else if(verificaInt == 1) {
+            contContas ++
 
+            val novaConta = ContaBancaria(numero = contContas.toString().padStart(4,'0'))
 
+            println("Insira seu nome:")
+            val nome = scannerInput.nextLine()
 
+            println("Insira seu cpf:")
+            val cpf = scannerInput.nextLine()
 
+            val cpfValidado = cpf.toIntOrNull()
+            if ()
 
+            val novoUsuario = Usuario(
+                nome = nome,
+                cpf = cpf,
+                contaBancaria = novaConta
+            )
+            usuarios.add(novoUsuario)
+            contas.add(novaConta)
 
+            println(novoUsuario)
 
+            println("Você será direcionado ao menu principal, digite uma opção ou digite 'sair' para sair")
+            continue
+        } else if(verificaInt == 2){
+
+        } else if(verificaInt == 3){
+
+        } else if(verificaInt == 4){
+
+        } else {
+            println("Insira um número válido")
+        }
+    } while (true)
+
+    for (i in usuarios){ //teste para ver lista de usuários
+        println(i)
+    }
+}
